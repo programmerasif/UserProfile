@@ -1,6 +1,23 @@
 import { Link } from 'react-router-dom';
 import ima from '../../assets/rsz_1close-up-young-successful-man-smiling-camera-standing-casual-outfit-against-blue-background.jpg'
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { fetchUser } from '../../redux/features/user/userSlice';
+import { data } from 'autoprefixer';
 const AllUsers = () => {
+
+    const dispatch = useDispatch();
+  const {users} = useSelector((state) => state.user);
+
+  useEffect(() => {
+    fetch('http://localhost:5000/users')
+    .then(response => response.json())
+    .then(data => {
+        dispatch(fetchUser(data));
+    })
+    
+  }, []);
+console.log(users);
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 w-full xl:w-[90%] gap-5 xl:gap-10 mx-auto px-3">
             <div className="flex gap-3 items-center  bg-white drop-shadow-2xl rounded-xl">
