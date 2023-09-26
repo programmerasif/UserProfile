@@ -1,15 +1,28 @@
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-
+import { Link } from 'react-router-dom';
+import ima from '../../assets/rsz_1close-up-young-successful-man-smiling-camera-standing-casual-outfit-against-blue-background.jpg'
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect} from 'react';
+import { fetchUser } from '../../redux/features/user/userSlice';
 
 const AllUsers = () => {
-    const {users} = useSelector((state) => state.user);
- 
+
+    const dispatch = useDispatch();
+  const {users} = useSelector((state) => state.user);
+
+  useEffect(() => {
+    fetch('http://localhost:5000/users')
+    .then(response => response.json())
+    .then(data => {
+        dispatch(fetchUser(data));
+    })
+    
+  }, []);
+console.log(users);
     return (
-        <div>
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 w-full xl:w-[90%] gap-5 xl:gap-10 mx-auto px-3 mb-10">
+        <>
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 w-full xl:w-[90%] gap-5 xl:gap-10 mx-auto px-3">
             {
-                users.map(item => <div key={item._id}>
+                users.slice(0,6).map(item => <div key={item._id}>
                     <div className="flex gap-3 items-center  bg-white drop-shadow-2xl rounded-xl">
                 <img src={item.image} alt="" className='w-36  xl:w-52 rounded-xl'/>
                 <div className='text-start pe-5 flex flex-col gap-2 xl:gap-4'>
@@ -25,11 +38,10 @@ const AllUsers = () => {
                 </div>)
             }
         </div>
-        <div className='flex justify-center items-center mt-16 mb-10 bg-blue-500 w-36 px-5 py-3 text-white font-bold rounded-md mx-auto'>
-        <Link to='/'> <button >View Less</button> </Link>
+        <div className='flex justify-center items-center mt-16 bg-blue-500 w-36 px-5 py-3 text-white font-bold rounded-md mx-auto'>
+        <Link to='/allUsers'> <button >View All</button> </Link>
         </div>
-       
-        </div>
+        </>
     );
 };
 
