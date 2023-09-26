@@ -1,13 +1,15 @@
+import { Outlet } from 'react-router-dom'
 import './App.css'
-import AllUsers from './components/AllUsers/AllUsers'
+import Nave from './components/Nav/Nave'
+
 
 function App() {
  
 
   return (
     <>
-    this is home 
-    <AllUsers />
+    <Nave/>
+    <Outlet />
     </>
   )
 }
