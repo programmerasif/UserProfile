@@ -27,8 +27,9 @@ const router = createBrowserRouter([
         element:<AllUsers />
       },
       {
-        path:"Profile",
-        element:<Profile />
+        path:"Profile/:id",
+        element:<Profile />,
+        loader: ({params}) => {return params }
       }
     ]
   },
