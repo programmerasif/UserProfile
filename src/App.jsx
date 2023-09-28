@@ -6,8 +6,6 @@ import Nave from './components/Nav/Nave'
 function App() {
  const location = useLocation().pathname.slice(0,8)
 
- console.log(location);
-
   return (
     <>
     {
