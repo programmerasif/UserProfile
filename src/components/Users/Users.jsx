@@ -9,7 +9,7 @@ const AllUsers = () => {
   const {users} = useSelector((state) => state.user);
 
   useEffect(() => {
-    fetch('http://localhost:5000/users')
+    fetch('https://user-profile-backend-9y9q.vercel.app/users')
     .then(response => response.json())
     .then(data => {
         dispatch(fetchUser(data));
